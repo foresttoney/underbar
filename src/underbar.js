@@ -58,12 +58,12 @@ var _ = {};
   _.each = function(collection, iterator) {
     if (typeof collection.length === 'number') {
       for (var i = 0, len = collection.length; i < len; i+=1) {
-        iterator(collection[value], value, collection);
+        iterator(collection[i], i, collection);
       }
     } else {
-        for(key in collection) {
-          iterator(collection[key], key, iterator);
-        }
+      for (var key in collection) {
+        iterator(collection[key], key, collection);
+      }
     }
   };
 
