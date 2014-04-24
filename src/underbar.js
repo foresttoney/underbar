@@ -106,8 +106,14 @@ var _ = {};
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var results = []; 
+    _.each(array, function(value) {
+      if (results.indexOf(value) === -1) {
+        results.push(value);
+      }
+    });
+    return results; 
   };
-
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
