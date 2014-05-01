@@ -196,9 +196,9 @@ var _ = {};
     // TIP: Try re-using reduce() here.
     return _.reduce(collection, function(accumulator, value) {
       if (typeof iterator === 'function') { 
-        return !!(accumulator && (accumulator = iterator(value)));
+        return accumulator && !!(accumulator = iterator(value));
       } else { 
-        return (accumulator && (accumulator = !!(value)));
+        return accumulator && (accumulator = !!(value));
       }
     }, true);
   };
@@ -207,6 +207,13 @@ var _ = {};
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here. 
+    return _.reduce(collection, function(accumulator, value) {
+      if (typeof iterator === 'function') {
+        return accumulator || !!(accumulator = iterator(value));
+      } else {
+        return accumulator || (accumulator = !!(value));
+      }
+    }, false);
   };
 
 
