@@ -297,7 +297,14 @@ var _ = {};
   // _.memoize should return a function that when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
-  _.memoize = function(func) {
+  _.memoize = function(func) { 
+    return function() {
+      var args = Array.prototype.slice.call(arguments); 
+      if (!func.cache) {
+        func.cache = {}; 
+      }
+      return args in func.cache ? func.cache[args] : func.cache[args] = func.apply(this, args); 
+    }; 
   };
 
   // Delays a function for the given number of milliseconds, and then calls
